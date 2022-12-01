@@ -51,4 +51,8 @@ public class UsuarioDAO {
 			this.usuarios.remove(user);
 		}
 	}
+	
+	public void toCsv() {
+		
+	}
 }

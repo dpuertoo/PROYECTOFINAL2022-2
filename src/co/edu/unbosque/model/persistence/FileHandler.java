@@ -1,14 +1,19 @@
 package co.edu.unbosque.model.persistence;
 
+import java.io.BufferedReader;
 import java.io.File;
 
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
+import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.io.PrintWriter;
 import java.util.ArrayList;
+import java.util.Iterator;
 
 import org.jfree.chart.JFreeChart;
 import org.jfree.data.category.DefaultCategoryDataset;
@@ -73,6 +78,48 @@ public class FileHandler {
 			pdfDocument.close();
 		} catch (FileNotFoundException e) {
 
+		}
+	}
+	
+	public String[] leerCsv(ArrayList<UsuarioDTO> a) {
+		UsuarioDTO u;
+		String linea;
+		String[] datos;
+		try {
+			FileReader fr = new FileReader(this.fDatos);
+			BufferedReader br = new BufferedReader(fr);
+			while (br.readLine() != null) {
+				datos = br.readLine().split(",");
+//				u = new UsuarioDTO(datos[0], datos[0], datos[0], datos[0], datos[0], datos[0], datos[0], datos[0], String.valueOf(datos[0]), 0, 0, 0, 0, 0, 0, false, false)
+				a.add(u);
+			}
+			fr.close();
+		} catch (IOException e) {
+			return null;
+		}
+		return datos;
+	}
+	
+	public void escribirCsv(ArrayList<UsuarioDTO> a) {
+//		try {
+//			FileWriter fw = new FileWriter(this.fDatos);
+//			PrintWriter pw = new PrintWriter(fw);
+//
+//			pw.print(pDato);
+//			fw.close();
+//
+//		} catch (IOException e) {
+//			return -1;
+//		}
+//		return 0;
+		
+		try {
+			FileWriter fw = new FileWriter(fDatos);
+			for (UsuarioDTO u : a) {
+				fw.write(u.toCsv()+"\n");
+			}
+		} catch (Exception e) {
+			System.out.println("error");
 		}
 	}
 
