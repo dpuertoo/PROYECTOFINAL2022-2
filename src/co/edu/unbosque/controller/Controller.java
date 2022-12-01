@@ -64,7 +64,7 @@ public class Controller implements ActionListener {
 					null, null);
 		}
 		if (e.getActionCommand().equals(this.g.getVa().getPanelMenu().GENERARPDF)) {
-			this.f.getFh().generarPDF();
+			this.f.getPdf().generarPDF();
 		}
 	}
 
@@ -231,7 +231,7 @@ public class Controller implements ActionListener {
 		} else if (usuarioAdmin.equals("Admin") == true && contrasenaAdmin.equals("1234") == true) {
 			this.g.getVa().setVisible(true);
 			this.g.getVp().dispose();
-			this.f.getFh().leerRegistro();
+			this.f.getBf().leerRegistro();
 			this.g.mostrarRegistros(f.getuDAO().listarArrayUsuarios().size(), f.getuDAO().listarArrayUsuarios(),
 					PasarDivorcioAString(obtenerDatoRadioButton()), PasarEstadoAString(true));
 		} else {
