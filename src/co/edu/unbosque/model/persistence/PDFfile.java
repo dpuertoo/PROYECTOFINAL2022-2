@@ -24,8 +24,7 @@ public class PDFfile {
 	}
 
 	public void generarPDF() {
-        DateFormat dateFormat = new SimpleDateFormat("dd MMM yyyy, HH:mm:ss");
-        
+        DateFormat dateFormat = new SimpleDateFormat("dd MMM yyyy, HH:mm");
         String fecha = dateFormat.format(new Date());
 		try {
 			PdfWriter writer = new PdfWriter(pdf);
