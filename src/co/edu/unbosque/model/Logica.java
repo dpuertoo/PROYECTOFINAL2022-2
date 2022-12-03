@@ -68,24 +68,17 @@ public class Logica {
 			}
 		}
 	}
-//	public void ordenamientoAlfabetico(ArrayList<String> array) {
-//		for (int i = 0; i < array.size(); i++) {
-//			for (int j = 0; j < array.size() && i!= j; j++) {
-//				if (array.get(i).compareToIgnoreCase(array.get(j)) > 0) {
-//					String aux = array.get(i);
-//					array.get(i) = array.get(j);
-//					
-//					
-//					String aux=stud.get(i); 
-//					Double auxv=use.get(i); 
-//					stud.set(i,stud.get(j)); 
-//					uspe.set(i,uspe.get(j)); 
-//					stud.set(j,aux); 
-//					uspe.set(j,auxv);
-//				}
-//			}
-//		}
-//	}
+	public void ordenamientoAlfabetico(ArrayList<String> array) {
+		for (int i = 0; i < array.size(); i++) {
+			for (int j = 0; j < array.size() && i!= j; j++) {
+				if (array.get(i).compareToIgnoreCase(array.get(j)) > 0) {
+					String aux = array.get(i);
+					array.set(i,array.get(j)); 
+					array.set(j,aux); 
+				}
+			}
+		}
+	}
 	
 	public void orderarLetrasDescendente(ArrayList<Integer> ar) {
 		String a = "1";
