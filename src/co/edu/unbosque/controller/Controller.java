@@ -147,7 +147,6 @@ public class Controller implements ActionListener {
 			double estatura = Double.parseDouble(g.getVr().getTxtEstatura().getText());
 			boolean estado = true;
 			usuario = new UsuarioDTO(nombre, Apellido1, Apellido2, sexo, user, contrasena, correo, nacimiento, id, edad, numLikesRecibidos, numLikesEnviados, numMatches, ingresos, estatura, divorcios, estado);
->>>>>>> branch 'master' of https://github.com/dpuertoo/PROYECTOFINAL2022-2.git
 		} catch (NullPointerException e) {
 			this.g.mostrarMensaje("Debe llenar todos los campos", "Advertencia", 2);
 		} catch (NumberFormatException e) {
