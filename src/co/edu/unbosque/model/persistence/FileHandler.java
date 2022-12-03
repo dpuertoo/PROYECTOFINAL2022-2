@@ -81,24 +81,24 @@ public class FileHandler {
 		}
 	}
 	
-	public String[] leerCsv(ArrayList<UsuarioDTO> a) {
-		UsuarioDTO u;
-		String linea;
-		String[] datos;
-		try {
-			FileReader fr = new FileReader(this.fDatos);
-			BufferedReader br = new BufferedReader(fr);
-			while (br.readLine() != null) {
-				datos = br.readLine().split(",");
-//				u = new UsuarioDTO(datos[0], datos[0], datos[0], datos[0], datos[0], datos[0], datos[0], datos[0], String.valueOf(datos[0]), 0, 0, 0, 0, 0, 0, false, false)
-				a.add(u);
-			}
-			fr.close();
-		} catch (IOException e) {
-			return null;
-		}
-		return datos;
-	}
+//	public String[] leerCsv(ArrayList<UsuarioDTO> a) {
+//		UsuarioDTO u;
+//		String linea;
+//		String[] datos;
+//		try {
+//			FileReader fr = new FileReader(this.fDatos);
+//			BufferedReader br = new BufferedReader(fr);
+//			while (br.readLine() != null) {
+//				datos = br.readLine().split(",");
+////				u = new UsuarioDTO(datos[0], datos[0], datos[0], datos[0], datos[0], datos[0], datos[0], datos[0], String.valueOf(datos[0]), 0, 0, 0, 0, 0, 0, false, false)
+//				a.add(u);
+//			}
+//			fr.close();
+//		} catch (IOException e) {
+//			return null;
+//		}
+//		return datos;
+//	}
 	
 	public void escribirCsv(ArrayList<UsuarioDTO> a) {
 //		try {

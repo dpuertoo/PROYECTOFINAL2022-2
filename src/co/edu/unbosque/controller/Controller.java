@@ -73,41 +73,24 @@ public class Controller implements ActionListener {
 		SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
 		Date fechanacimiento = this.g.getVr().getCalendario().getDate();
 		try {
-			usuario = new UsuarioDTO();
 			int id = 0;
-			usuario.setId(id);
 			String nombre = this.g.getVr().getTxtNombre().getText();
-			usuario.setNombre(nombre);
 			String Apellido1 = separarApellido1();
-			usuario.setApellido1(Apellido1);
 			String Apellido2 = separarApellido2();
-			usuario.setApellido2(Apellido2);
 			String sexo = (String) this.g.getVr().getSexo().getSelectedItem();
-			usuario.setSexo(sexo);
 			String user = this.g.getVr().getTxtUsuario().getText();
-			usuario.setUsuario(user);
 			String contrasena = this.g.getVr().getTxtContrasena().getText();
-			usuario.setContrasena(contrasena);
 			String correo = this.g.getVr().getTxtCorreo().getText();
-			usuario.setCorreo(correo);
 			String nacimiento = sdf.format(fechanacimiento);
-			usuario.setNacimiento(nacimiento);
 			int edad = calcularEdad(g.getVr().getCalendario().getCalendar());
-			usuario.setEdad(edad);
 			double ingresos = Double.parseDouble(g.getVr().getTxtIngresos().getText());
-			usuario.setIngresos(ingresos);
 			boolean divorcios = obtenerDatoRadioButton();
-			usuario.setDivorcios(divorcios);
 			int numLikesRecibidos = 0;
-			usuario.setNumLikesRecibidos(numLikesRecibidos);
 			int numLikesEnviados = 0;
-			usuario.setNumLikesEnviados(numLikesEnviados);
 			int numMatches = 0;
-			usuario.setNumMatches(numMatches);
 			double estatura = Double.parseDouble(g.getVr().getTxtEstatura().getText());
-			usuario.setEstatura(estatura);
 			boolean estado = true;
-			usuario.setEstado(estado);
+			usuario = new UsuarioDTO(nombre, Apellido1, Apellido2, sexo, user, contrasena, correo, nacimiento, id, edad, numLikesRecibidos, numLikesEnviados, numMatches, ingresos, estatura, divorcios, estado);
 		} catch (NullPointerException e) {
 			this.g.mostrarMensaje("Debe llenar todos los campos", "Advertencia", 2);
 		} catch (NumberFormatException e) {
