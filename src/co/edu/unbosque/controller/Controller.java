@@ -28,44 +28,6 @@ public class Controller implements ActionListener {
 
 	}
 
-	public void obtenerDatos() {
-		SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
-		Date fechanacimiento = this.g.getVr().getCalendario().getDate();
-		try {
-			int id = numeroId();
-			String nombre = g.getVr().getTxtNombre().getText();
-			String apellido1 = g.getVr().getTxtApellido1().getText();
-			String apellido2 = g.getVr().getTxtApellido2().getText();
-			String sexo = (String) this.g.getVr().getSexo().getSelectedItem();
-			String usuario = g.getVr().getTxtUsuario().getText();
-			if (comparadorUsuario(usuario) == true) {
-				this.g.mostrarMensaje("Usuario repetido", "Advertencia", 2);
-			} else {
-				String contrasena = g.getVr().getTxtContrasena().getText();
-				String correo = g.getVr().getTxtContrasena().getText();
-				String nacimiento = sdf.format(fechanacimiento);
-				int edad = calcularEdad(g.getVr().getCalendario().getCalendar());
-				double estatura = obtenerEstatura(sexo);
-				double ingreso = Double.parseDouble(g.getVr().getTxtIngresos().getText());
-				String divorcios = obtenerDatoRadioButton();
-				int numeroDeLikesRecibidos = 0;
-				int numeroDeLikesEnviados = 0;
-				int numeroDeLikesMatch = 0;
-				String estado = "disponible";
-				this.f.getuDAO().agregar(id, nombre, apellido1, apellido2, sexo, usuario, contrasena, correo,
-						nacimiento, edad, estatura, ingreso, divorcios, numeroDeLikesRecibidos, numeroDeLikesEnviados,
-						numeroDeLikesMatch, estado);
-				this.g.mostrarMensaje("Registrado correctamente", "Exitoso registro", 1);
-			}
-		} catch (NullPointerException e) {
-			this.g.mostrarMensaje("Debe llenar todos los campos", "Advertencia", 2);
-		} catch (NumberFormatException e) {
-			this.g.mostrarMensaje(
-					"Debe llenar todos los campos correctamente \n Recuerde que: \n Los decimales se escriben con punto, no con coma \n La fecha se escribe en formato numerico \n No debe poner unidades de medida \n Las mujeres es opcional colocar su estatura, por lo tanto tiene que colocar 0, en el caso de los hombres es obligatorio",
-					"Advertencia", 2);
-		}
-	}
-
 	@SuppressWarnings("static-access")
 	@Override
 	public void actionPerformed(ActionEvent e) {
@@ -109,15 +71,45 @@ public class Controller implements ActionListener {
 			this.g.getVp().setVisible(true);
 			this.g.getVa().setVisible(false);
 		}
-//		if (e.getActionCommand().equals(this.g.getVa().getPanelMenu().BUSCAR)) {
-//			this.g.mostrarUsuario(
-//					this.f.getuDAO().buscarUsuario(this.g.getVa().getPanelMenu().getTxtbuscador().getText(), this.g),
-//					null, null);
 	}
-//		if (e.getActionCommand().equals(this.g.getVa().getPanelMenu().GENERARPDF)) {
-//			this.f.getFh().generarPDF();
-//		}
-//	}
+
+	public void obtenerDatos() {
+		SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+		Date fechanacimiento = this.g.getVr().getCalendario().getDate();
+		try {
+			int id = numeroId();
+			String nombre = g.getVr().getTxtNombre().getText();
+			String apellido1 = g.getVr().getTxtApellido1().getText();
+			String apellido2 = g.getVr().getTxtApellido2().getText();
+			String sexo = (String) this.g.getVr().getSexo().getSelectedItem();
+			String usuario = g.getVr().getTxtUsuario().getText();
+			if (comparadorUsuario(usuario) == true) {
+				this.g.mostrarMensaje("Usuario repetido", "Advertencia", 2);
+			} else {
+				String contrasena = g.getVr().getTxtContrasena().getText();
+				String correo = g.getVr().getTxtContrasena().getText();
+				String nacimiento = sdf.format(fechanacimiento);
+				int edad = calcularEdad(g.getVr().getCalendario().getCalendar());
+				double estatura = obtenerEstatura(sexo);
+				double ingreso = Double.parseDouble(g.getVr().getTxtIngresos().getText());
+				String divorcios = obtenerDatoRadioButton();
+				int numeroDeLikesRecibidos = 0;
+				int numeroDeLikesEnviados = 0;
+				int numeroDeLikesMatch = 0;
+				String estado = "disponible";
+				this.f.getuDAO().agregar(id, nombre, apellido1, apellido2, sexo, usuario, contrasena, correo,
+						nacimiento, edad, estatura, ingreso, divorcios, numeroDeLikesRecibidos, numeroDeLikesEnviados,
+						numeroDeLikesMatch, estado);
+				this.g.mostrarMensaje("Registrado correctamente", "Exitoso registro", 1);
+			}
+		} catch (NullPointerException e) {
+			this.g.mostrarMensaje("Debe llenar todos los campos", "Advertencia", 2);
+		} catch (NumberFormatException e) {
+			this.g.mostrarMensaje(
+					"Debe llenar todos los campos correctamente \n Recuerde que: \n Los decimales se escriben con punto, no con coma \n La fecha se escribe en formato numerico \n No debe poner unidades de medida \n Las mujeres es opcional colocar su estatura, por lo tanto tiene que colocar 0, en el caso de los hombres es obligatorio",
+					"Advertencia", 2);
+		}
+	}
 
 	public String obtenerDatoRadioButton() {
 		String respuesta = "NO APLICA";
@@ -212,49 +204,5 @@ public class Controller implements ActionListener {
 		}
 		return difAno;
 	}
-
-//	@SuppressWarnings("unlikely-arg-type")
-//	public void verificarEspaciosVr() {
-//		if (this.g.getVr().getDivorciosi().isSelected() == true) {
-//			System.out.println("si");
-//			if (this.g.getVr().getTxtEstatura() == null) {
-//				this.g.getVr().getTxtEstatura().setText(" ");
-//				this.g.getVr().getTxtIngresos().setEditable(false);
-//			}
-//		}
-
-//		if (this.g.getVr().getSexo().equals("Femenino")) {
-//			if (this.g.getVr().getTxtNombre().getText().isEmpty() || this.g.getVr().getTxtApellido().getText().isEmpty()
-//					|| this.g.getVr().getTxtUsuario().getText().isEmpty()
-//					|| this.g.getVr().getTxtCorreo().getText().isEmpty() || this.g.getVr().getCalendario() == null
-//					|| this.g.getVr().getGrupo().isSelected(null)
-//					|| this.g.getVr().getTxtContrasena().getText().isEmpty()) {
-//				g.mostrarMensaje("Diligenciar todos los campos obligatorios", "Advertenia", 2);
-//				this.g.getVr().repaint();
-//				System.out.println("ola");
-//			} else {
-//				this.f.getuDAO().agregarUsuario(obtenerDatos(), this.g);
-//				this.g.getVu().setVisible(true);
-//				this.g.getVr().dispose();
-//			}
-//
-//		}
-//		if (this.g.getVr().getSexo().equals("Masculino")) {
-//			g.getVr().getGrupo().setSelected(g.getVr().getDivorciono().getModel(), false);
-//			if (this.g.getVr().getTxtNombre().getText().isEmpty() || this.g.getVr().getTxtApellido().getText().isEmpty()
-//					|| this.g.getVr().getTxtUsuario().getText().isEmpty()
-//					|| this.g.getVr().getTxtCorreo().getText().isEmpty() || this.g.getVr().getCalendario() == null
-//					|| this.g.getVr().getTxtEstatura().getText().isEmpty()
-//					|| this.g.getVr().getTxtIngresos().getText().isEmpty()
-//					|| this.g.getVr().getTxtContrasena().getText().isEmpty()) {
-//				g.mostrarMensaje("Diligenciar todos los campos", "Advertenia", 2);
-//			} else {
-//				this.f.getuDAO().agregarUsuario(obtenerDatos(), this.g);
-//
-//			}
-//			this.g.getVr().repaint();
-//			System.out.println("chao");
-//
-//		}
 
 }
