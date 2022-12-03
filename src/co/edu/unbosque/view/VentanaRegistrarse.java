@@ -25,7 +25,7 @@ public class VentanaRegistrarse extends JFrame {
 	public static final String ATRAS = "ATRAS";
 
 	private JLabel fondo;
-	private JTextField txtNombre, txtApellido, txtUsuario, txtCorreo, txtEstatura, txtIngresos, txtContrasena;
+	private JTextField txtNombre, txtApellido1, txtApellido2, txtUsuario, txtCorreo, txtEstatura, txtIngresos, txtContrasena;
 	private JComboBox<String> sexo;
 	private JRadioButton divorciosi, divorciono;
 	private ButtonGroup grupo;
@@ -56,10 +56,15 @@ public class VentanaRegistrarse extends JFrame {
 		this.txtNombre.setBounds(145, 85, 130, 25);
 		this.txtNombre.setBorder(null);
 
-		this.txtApellido = new JTextField();
-		this.txtApellido.setForeground(Color.GRAY);
-		this.txtApellido.setBounds(410, 85, 150, 25);
-		this.txtApellido.setBorder(null);
+		this.txtApellido1 = new JTextField();
+		this.txtApellido1.setForeground(Color.GRAY);
+		this.txtApellido1.setBounds(410, 85, 75, 25);
+		this.txtApellido1.setBorder(null);
+		
+		this.txtApellido2 = new JTextField();
+		this.txtApellido2.setForeground(Color.GRAY);
+		this.txtApellido2.setBounds(490, 85, 75, 25);
+		this.txtApellido2.setBorder(null);
 
 		this.txtUsuario = new JTextField();
 		this.txtUsuario.setForeground(Color.GRAY);
@@ -78,8 +83,8 @@ public class VentanaRegistrarse extends JFrame {
 		this.sexo = new JComboBox<String>();
 		this.sexo.setForeground(Color.GRAY);
 		this.sexo.addItem("");
-		this.sexo.addItem("Femenino");
-		this.sexo.addItem("Masculino");
+		this.sexo.addItem("M");
+		this.sexo.addItem("H");
 		this.sexo.setBackground(Color.WHITE);
 		this.sexo.setBounds(110, 225, 100, 25);
 
@@ -123,7 +128,8 @@ public class VentanaRegistrarse extends JFrame {
 		this.butAtras.setBorder(null);
 
 		add(this.txtNombre);
-		add(this.txtApellido);
+		add(this.txtApellido1);
+		add(this.txtApellido2);
 		add(this.txtUsuario);
 		add(this.txtContrasena);
 		add(this.txtCorreo);
@@ -144,14 +150,6 @@ public class VentanaRegistrarse extends JFrame {
 
 	public void setCalendario(JDateChooser calendario) {
 		this.calendario = calendario;
-	}
-
-	public JTextField getTxtApellido() {
-		return txtApellido;
-	}
-
-	public void setTxtApellido(JTextField txtApellido) {
-		this.txtApellido = txtApellido;
 	}
 
 	public JLabel getFondo() {
@@ -265,4 +263,22 @@ public class VentanaRegistrarse extends JFrame {
 	public static String getAtras() {
 		return ATRAS;
 	}
+
+	public JTextField getTxtApellido1() {
+		return txtApellido1;
+	}
+
+	public void setTxtApellido1(JTextField txtApellido1) {
+		this.txtApellido1 = txtApellido1;
+	}
+
+	public JTextField getTxtApellido2() {
+		return txtApellido2;
+	}
+
+	public void setTxtApellido2(JTextField txtApellido2) {
+		this.txtApellido2 = txtApellido2;
+	}
+	
+	
 }

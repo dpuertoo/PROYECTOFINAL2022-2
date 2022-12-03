@@ -1,10 +1,15 @@
 package co.edu.unbosque.controller;
 
 import java.awt.event.ActionEvent;
+
 import java.awt.event.ActionListener;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.Iterator;
+
+import javax.swing.JOptionPane;
 
 import co.edu.unbosque.model.FachadaProvisional;
 import co.edu.unbosque.model.UsuarioDTO;
@@ -18,8 +23,47 @@ public class Controller implements ActionListener {
 	public Controller() {
 		this.g = new GUI(this);
 		this.f = new FachadaProvisional();
+		System.out.println(f.getuDAO().mostrarTodo());
 		this.g.getVp().setVisible(true);
 
+	}
+
+	public void obtenerDatos() {
+		SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+		Date fechanacimiento = this.g.getVr().getCalendario().getDate();
+		try {
+			int id = numeroId();
+			String nombre = g.getVr().getTxtNombre().getText();
+			String apellido1 = g.getVr().getTxtApellido1().getText();
+			String apellido2 = g.getVr().getTxtApellido2().getText();
+			String sexo = (String) this.g.getVr().getSexo().getSelectedItem();
+			String usuario = g.getVr().getTxtUsuario().getText();
+			if (comparadorUsuario(usuario) == true) {
+				this.g.mostrarMensaje("Usuario repetido", "Advertencia", 2);
+			} else {
+				String contrasena = g.getVr().getTxtContrasena().getText();
+				String correo = g.getVr().getTxtContrasena().getText();
+				String nacimiento = sdf.format(fechanacimiento);
+				int edad = calcularEdad(g.getVr().getCalendario().getCalendar());
+				double estatura = obtenerEstatura(sexo);
+				double ingreso = Double.parseDouble(g.getVr().getTxtIngresos().getText());
+				String divorcios = obtenerDatoRadioButton();
+				int numeroDeLikesRecibidos = 0;
+				int numeroDeLikesEnviados = 0;
+				int numeroDeLikesMatch = 0;
+				String estado = "disponible";
+				this.f.getuDAO().agregar(id, nombre, apellido1, apellido2, sexo, usuario, contrasena, correo,
+						nacimiento, edad, estatura, ingreso, divorcios, numeroDeLikesRecibidos, numeroDeLikesEnviados,
+						numeroDeLikesMatch, estado);
+				this.g.mostrarMensaje("Registrado correctamente", "Exitoso registro", 1);
+			}
+		} catch (NullPointerException e) {
+			this.g.mostrarMensaje("Debe llenar todos los campos", "Advertencia", 2);
+		} catch (NumberFormatException e) {
+			this.g.mostrarMensaje(
+					"Debe llenar todos los campos correctamente \n Recuerde que: \n Los decimales se escriben con punto, no con coma \n La fecha se escribe en formato numerico \n No debe poner unidades de medida \n Las mujeres es opcional colocar su estatura, por lo tanto tiene que colocar 0, en el caso de los hombres es obligatorio",
+					"Advertencia", 2);
+		}
 	}
 
 	@SuppressWarnings("static-access")
@@ -33,10 +77,17 @@ public class Controller implements ActionListener {
 			this.g.getVp().dispose();
 		}
 		if (e.getActionCommand().equals(this.g.getVp().SIGUIENTE)) {
-			comprobarUsuarioVp();
+			if (comprobarEntrada() == true) {
+				this.g.getVp().setVisible(false);
+				this.g.getVu().setVisible(true);
+			} else {
+				comprobarEntrada();
+			}
 		}
 		if (e.getActionCommand().equals(this.g.getVr().FINALIZAR)) {
-			verificarEspaciosVr();
+			obtenerDatos();
+			this.g.getVr().dispose();
+			this.g.getVp().setVisible(true);
 //			this.g.getVu().setVisible(true);
 //			this.g.getVr().dispose();
 //			this.f.getuDAO().agregarUsuario(obtenerDatos(), this.g);
@@ -58,76 +109,94 @@ public class Controller implements ActionListener {
 			this.g.getVp().setVisible(true);
 			this.g.getVa().setVisible(false);
 		}
-		if (e.getActionCommand().equals(this.g.getVa().getPanelMenu().BUSCAR)) {
-			this.g.mostrarUsuario(
-					this.f.getuDAO().buscarUsuario(this.g.getVa().getPanelMenu().getTxtbuscador().getText(), this.g),
-					null, null);
-		}
-		if (e.getActionCommand().equals(this.g.getVa().getPanelMenu().GENERARPDF)) {
-			this.f.getFh().generarPDF();
-		}
+//		if (e.getActionCommand().equals(this.g.getVa().getPanelMenu().BUSCAR)) {
+//			this.g.mostrarUsuario(
+//					this.f.getuDAO().buscarUsuario(this.g.getVa().getPanelMenu().getTxtbuscador().getText(), this.g),
+//					null, null);
 	}
+//		if (e.getActionCommand().equals(this.g.getVa().getPanelMenu().GENERARPDF)) {
+//			this.f.getFh().generarPDF();
+//		}
+//	}
 
-	public UsuarioDTO obtenerDatos() {
-		UsuarioDTO usuario = null;
-		SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
-		Date fechanacimiento = this.g.getVr().getCalendario().getDate();
-		try {
-			usuario = new UsuarioDTO();
-			int id = 0;
-			usuario.setId(id);
-			String nombre = this.g.getVr().getTxtNombre().getText();
-			usuario.setNombre(nombre);
-			String Apellido1 = separarApellido1();
-			usuario.setApellido1(Apellido1);
-			String Apellido2 = separarApellido2();
-			usuario.setApellido2(Apellido2);
-			String sexo = (String) this.g.getVr().getSexo().getSelectedItem();
-			usuario.setSexo(sexo);
-			String user = this.g.getVr().getTxtUsuario().getText();
-			usuario.setUsuario(user);
-			String contrasena = this.g.getVr().getTxtContrasena().getText();
-			usuario.setContrasena(contrasena);
-			String correo = this.g.getVr().getTxtCorreo().getText();
-			usuario.setCorreo(correo);
-			String nacimiento = sdf.format(fechanacimiento);
-			usuario.setNacimiento(nacimiento);
-			int edad = calcularEdad(g.getVr().getCalendario().getCalendar());
-			usuario.setEdad(edad);
-			double ingresos = Double.parseDouble(g.getVr().getTxtIngresos().getText());
-			usuario.setIngresos(ingresos);
-			boolean divorcios = obtenerDatoRadioButton();
-			usuario.setDivorcios(divorcios);
-			int numLikesRecibidos = 0;
-			usuario.setNumLikesRecibidos(numLikesRecibidos);
-			int numLikesEnviados = 0;
-			usuario.setNumLikesEnviados(numLikesEnviados);
-			int numMatches = 0;
-			usuario.setNumMatches(numMatches);
-			double estatura = Double.parseDouble(g.getVr().getTxtEstatura().getText());
-			usuario.setEstatura(estatura);
-			boolean estado = true;
-			usuario.setEstado(estado);
-		} catch (NullPointerException e) {
-			this.g.mostrarMensaje("Debe llenar todos los campos", "Advertencia", 2);
-		} catch (NumberFormatException e) {
-			this.g.mostrarMensaje(
-					"Debe llenar todos los campos correctamente \n Recuerde que: \n Los decimales se escriben con punto, no con coma \n La fecha se escribe en formato numerico \n No debe poner unidades de medida",
-					"Advertencia", 2);
-		} catch (ArrayIndexOutOfBoundsException e) {
-			this.g.mostrarMensaje("Debe diligenciar dos apellidos", "Advertencia", 2);
-		}
-		return usuario;
-	}
-
-	public boolean obtenerDatoRadioButton() {
-		boolean respuesta = false;
+	public String obtenerDatoRadioButton() {
+		String respuesta = "NO APLICA";
 		if (this.g.getVr().getDivorciosi().isSelected() == true) {
-			respuesta = true;
+			respuesta = "SI";
 		} else if (this.g.getVr().getDivorciono().isSelected() == false) {
-			respuesta = false;
+			respuesta = "NO";
 		}
 		return respuesta;
+
+	}
+
+	public boolean comprobarEntrada() {
+		boolean encontrado = false;
+		String usuario = g.getVp().getTxtUsuario().getText();
+		String contrasena = g.getVp().getTxtContra().getText();
+		if (comprobarUsuario(usuario) == false && comprobarContrasena(contrasena) == false) {
+			encontrado = false;
+			this.g.mostrarMensaje("Usuario y/o contraseña incorrecto", "No fue posible iniciar sesion", 1);
+		} else if (comprobarUsuario(usuario) == true && comprobarContrasena(contrasena) == false) {
+			encontrado = false;
+			this.g.mostrarMensaje("Usuario y/o contraseña incorrecto", "No fue posible iniciar sesion", 1);
+		} else if (comprobarUsuario(usuario) == false && comprobarContrasena(contrasena) == true) {
+			encontrado = false;
+			this.g.mostrarMensaje("Usuario y/o contraseña incorrecto", "No fue posible iniciar sesion", 1);
+		} else if ((comprobarUsuario(usuario) == true && comprobarContrasena(contrasena) == true)) {
+			encontrado = true;
+			this.g.mostrarMensaje("Bienvenido: " + usuario, "Inicio de sesion exitoso", 1);
+		}
+		return encontrado;
+	}
+
+	public boolean comprobarContrasena(String contrasena) {
+		boolean encontrado = false;
+		for (int i = 0; i < f.getuDAO().getLista().size(); i++) {
+			if (f.getuDAO().getLista().get(i).getContrasena().equals(contrasena)) {
+				encontrado = true;
+			}
+		}
+		return encontrado;
+	}
+
+	public boolean comprobarUsuario(String usuario) {
+		boolean encontrado = false;
+		for (int i = 0; i < f.getuDAO().getLista().size(); i++) {
+			if (f.getuDAO().getLista().get(i).getUsuario().equals(usuario)) {
+				encontrado = true;
+			}
+		}
+		return encontrado;
+	}
+
+	public double obtenerEstatura(String sexo) {
+		double respuesta = 0.0;
+		double aux = Double.parseDouble(g.getVr().getTxtEstatura().getText());
+		if (this.g.getVr().getSexo().equals(sexo)) {
+		}
+		return respuesta + aux;
+	}
+
+	public boolean comparadorUsuario(String usuario) {
+		boolean encontrado = false;
+		for (int i = 0; i < f.getuDAO().getLista().size(); i++) {
+			if (f.getuDAO().getLista().get(i).getUsuario().equalsIgnoreCase(usuario)) {
+				encontrado = true;
+			}
+		}
+		return encontrado;
+	}
+
+	public int numeroId() {
+		int finalId = 0;
+		for (int i = 0; i < f.getuDAO().getLista().size(); i++) {
+			if (i < f.getuDAO().getLista().get(i).getId()) {
+				finalId = +i;
+				finalId = finalId + 2;
+			}
+		}
+		return finalId;
 	}
 
 	public int calcularEdad(Calendar nacimiento) {
@@ -144,49 +213,15 @@ public class Controller implements ActionListener {
 		return difAno;
 	}
 
-	public String PasarDivorcioAString(boolean divorcio) {
-		String respuesta = "";
-		if (divorcio == true) {
-			respuesta = "Si";
-		} else {
-			respuesta = "No";
-		}
-		return respuesta;
-	}
-
-	public String PasarEstadoAString(boolean estado) {
-		String respuesta = "";
-		if (estado == true) {
-			respuesta = "Disponible";
-		} else {
-			respuesta = "Inactivo";
-		}
-		return respuesta;
-	}
-
-	public String separarApellido1() {
-		String apellidos = g.getVr().getTxtApellido().getText();
-		String[] partes = apellidos.split(" ");
-		String apellido1 = partes[0];
-		return apellido1;
-	}
-
-	public String separarApellido2() {
-		String apellidos = g.getVr().getTxtApellido().getText();
-		String[] partes = apellidos.split(" ");
-		String apellido2 = partes[1];
-		return apellido2;
-	}
-
-	@SuppressWarnings("unlikely-arg-type")
-	public void verificarEspaciosVr() {
-		if (this.g.getVr().getDivorciosi().isSelected() == true) {
-			System.out.println("si");
-			if (this.g.getVr().getTxtEstatura() == null) {
-				this.g.getVr().getTxtEstatura().setText(" ");
-				this.g.getVr().getTxtIngresos().setEditable(false);
-			}
-		}
+//	@SuppressWarnings("unlikely-arg-type")
+//	public void verificarEspaciosVr() {
+//		if (this.g.getVr().getDivorciosi().isSelected() == true) {
+//			System.out.println("si");
+//			if (this.g.getVr().getTxtEstatura() == null) {
+//				this.g.getVr().getTxtEstatura().setText(" ");
+//				this.g.getVr().getTxtIngresos().setEditable(false);
+//			}
+//		}
 
 //		if (this.g.getVr().getSexo().equals("Femenino")) {
 //			if (this.g.getVr().getTxtNombre().getText().isEmpty() || this.g.getVr().getTxtApellido().getText().isEmpty()
@@ -221,23 +256,5 @@ public class Controller implements ActionListener {
 //			System.out.println("chao");
 //
 //		}
-	}
 
-	public void comprobarUsuarioVp() {
-		String usuarioAdmin = g.getVp().getTxtUsuario().getText();
-		String contrasenaAdmin = g.getVp().getTxtContra().getText();
-		if (this.g.getVp().getTxtUsuario().getText().isEmpty() || this.g.getVp().getTxtContra().getText().isEmpty()) {
-			this.g.mostrarMensaje("Diligenciar todos los campos", "Advertenia", 2);
-		} else if (usuarioAdmin.equals("Admin") == true && contrasenaAdmin.equals("1234") == true) {
-			this.g.getVa().setVisible(true);
-			this.g.getVp().dispose();
-			this.f.getFh().leerRegistro();
-			this.g.mostrarRegistros(f.getuDAO().listarArrayUsuarios().size(), f.getuDAO().listarArrayUsuarios(),
-					PasarDivorcioAString(obtenerDatoRadioButton()), PasarEstadoAString(true));
-		} else {
-			this.g.getVu().setVisible(true);
-			// Aca va el metodo que busca el usuario y comprueba si ya estsa registrado,
-			// tambien verifica la contraseña
-		}
-	}
 }

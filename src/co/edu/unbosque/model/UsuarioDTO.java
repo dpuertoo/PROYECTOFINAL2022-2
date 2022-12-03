@@ -1,15 +1,14 @@
 package co.edu.unbosque.model;
 
 import java.io.Serializable;
+import java.text.SimpleDateFormat;
 
 public class UsuarioDTO implements Serializable {
 
-	private static final long serialVersionUID = 1L;
+	private String nombre, apellido1, apellido2, sexo, nacimiento, usuario, contrasena, correo, divorcios, estado;
 
-	private String nombre, apellido1, apellido2, sexo, usuario, contrasena, correo, nacimiento;
 	private int id, edad, numLikesRecibidos, numLikesEnviados, numMatches;
 	private double ingresos, estatura;
-	private boolean divorcios, estado;
 
 	public UsuarioDTO() {
 		this.nombre = "";
@@ -25,16 +24,17 @@ public class UsuarioDTO implements Serializable {
 		this.numLikesRecibidos = 0;
 		this.numLikesEnviados = 0;
 		this.numMatches = 0;
-		this.ingresos = 0;
-		this.estatura = 0;
-		this.divorcios = false;
-		this.estado = false;
+		this.ingresos = 0.0;
+		this.estatura = 0.0;
+		this.divorcios = "NO aplica";
+		this.estado = "No";
 	}
-	
-	public UsuarioDTO(String nombre, String apellido1, String apellido2, String sexo, String usuario, String contrasena,
-			String correo, String nacimiento, int id, int edad, int numLikesRecibidos, int numLikesEnviados,
-			int numMatches, double ingresos, double estatura, boolean divorcios, boolean estado) {
+
+	public UsuarioDTO(int id, String nombre, String apellido1, String apellido2, String sexo, String usuario,
+			String contrasena, String correo, String nacimiento, int edad, double estatura, double ingresos,
+			String divorcios, int numLikesRecibidos, int numLikesEnviados, int numMatches, String estado) {
 		super();
+		this.id = id;
 		this.nombre = nombre;
 		this.apellido1 = apellido1;
 		this.apellido2 = apellido2;
@@ -43,17 +43,15 @@ public class UsuarioDTO implements Serializable {
 		this.contrasena = contrasena;
 		this.correo = correo;
 		this.nacimiento = nacimiento;
-		this.id = id;
 		this.edad = edad;
+		this.estatura = estatura;
+		this.ingresos = ingresos;
+		this.divorcios = divorcios;
 		this.numLikesRecibidos = numLikesRecibidos;
 		this.numLikesEnviados = numLikesEnviados;
 		this.numMatches = numMatches;
-		this.ingresos = ingresos;
-		this.estatura = estatura;
-		this.divorcios = divorcios;
 		this.estado = estado;
 	}
-
 
 	public String getNombre() {
 		return nombre;
@@ -109,14 +107,6 @@ public class UsuarioDTO implements Serializable {
 
 	public void setCorreo(String correo) {
 		this.correo = correo;
-	}
-
-	public String getNacimiento() {
-		return nacimiento;
-	}
-
-	public void setNacimiento(String nacimiento) {
-		this.nacimiento = nacimiento;
 	}
 
 	public int getId() {
@@ -175,20 +165,38 @@ public class UsuarioDTO implements Serializable {
 		this.estatura = estatura;
 	}
 
-	public boolean isDivorcios() {
+	public String getDivorcios() {
 		return divorcios;
 	}
 
-	public void setDivorcios(boolean divorcios) {
+	public void setDivorcios(String divorcios) {
 		this.divorcios = divorcios;
 	}
 
-	public boolean isEstado() {
+	public String getEstado() {
 		return estado;
 	}
 
-	public void setEstado(boolean estado) {
+	public void setEstado(String estado) {
 		this.estado = estado;
+	}
+
+	public String getNacimiento() {
+		return nacimiento;
+	}
+
+	public void setNacimiento(String nacimiento) {
+		this.nacimiento = nacimiento;
+	}
+
+	@Override
+	public String toString() {
+		String res = "";
+		res += this.id + ";" + this.nombre + ";" + this.apellido1 + ";" + this.apellido2 + ";" + this.sexo + ";"
+				+ this.usuario + ";" + this.contrasena + ";" + this.correo + ";" + this.nacimiento + ";" + this.edad
+				+ ";" + this.estatura + ";" + this.ingresos + ";" + this.divorcios + ";" + this.numLikesRecibidos + ";"
+				+ this.numLikesEnviados + ";" + this.numMatches + ";" + this.estado + "\n";
+		return res;
 	}
 
 }
