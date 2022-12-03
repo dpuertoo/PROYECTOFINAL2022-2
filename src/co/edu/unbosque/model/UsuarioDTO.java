@@ -30,9 +30,15 @@ public class UsuarioDTO implements Serializable {
 		this.estado = "No";
 	}
 
+<<<<<<< HEAD
 	public UsuarioDTO(int id, String nombre, String apellido1, String apellido2, String sexo, String usuario,
 			String contrasena, String correo, String nacimiento, int edad, double estatura, double ingresos,
 			String divorcios, int numLikesRecibidos, int numLikesEnviados, int numMatches, String estado) {
+=======
+	public UsuarioDTO(String nombre, String apellido1, String apellido2, String sexo, String usuario, String contrasena,
+			String correo, String nacimiento, int id, int edad, int numLikesRecibidos, int numLikesEnviados,
+			int numMatches, double ingresos, double estatura, boolean divorcios, boolean estado) {
+>>>>>>> branch 'master' of https://github.com/dpuertoo/PROYECTOFINAL2022-2.git
 		super();
 		this.id = id;
 		this.nombre = nombre;
@@ -53,6 +59,17 @@ public class UsuarioDTO implements Serializable {
 		this.estado = estado;
 	}
 
+<<<<<<< HEAD
+=======
+	public String toCsv() {
+		return this.id + "," + this.nombre + "," + this.apellido1 + "," + this.apellido2 + "," + this.sexo + ","
+				+ this.usuario + "," + this.contrasena + "," + this.correo + "," + this.nacimiento + "," + this.edad
+				+ "," + String.valueOf(this.ingresos) + "," + String.valueOf(this.divorcios) + ","
+				+ String.valueOf(this.numLikesEnviados) + "," + String.valueOf(this.numLikesRecibidos) + ","
+				+ String.valueOf(this.numMatches) + "," + String.valueOf(this.estado);
+	}
+
+>>>>>>> branch 'master' of https://github.com/dpuertoo/PROYECTOFINAL2022-2.git
 	public String getNombre() {
 		return nombre;
 	}

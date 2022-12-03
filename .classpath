@@ -6,6 +6,7 @@
 			<attribute name="module" value="true"/>
 		</attributes>
 	</classpathentry>
+<<<<<<< HEAD
 	<classpathentry exported="true" kind="lib" path="libs/iText/barcodes-7.1.16.jar"/>
 	<classpathentry exported="true" kind="lib" path="libs/iText/font-asian-7.1.16.jar"/>
 	<classpathentry exported="true" kind="lib" path="libs/iText/forms-7.1.16.jar"/>
@@ -36,5 +37,24 @@
 	<classpathentry exported="true" kind="lib" path="libs/JFreeChart/orsonpdf-1.6-eval.jar"/>
 	<classpathentry exported="true" kind="lib" path="libs/JFreeChart/servlet.jar"/>
 	<classpathentry exported="true" kind="lib" path="libs/JFreeChart/swtgraphics2d.jar"/>
+=======
+	<classpathentry kind="lib" path="libs/JCalendar/jcalendar-1.4.jar"/>
+	<classpathentry kind="lib" path="libs/JCalendar/jgoodies-common-1.2.0.jar"/>
+	<classpathentry kind="lib" path="libs/JCalendar/jgoodies-looks-2.4.1.jar"/>
+	<classpathentry kind="lib" path="libs/JCalendar/junit-4.6.jar"/>
+	<classpathentry kind="lib" path="libs/JFreeChart/hamcrest-core-1.3.jar"/>
+	<classpathentry kind="lib" path="libs/JFreeChart/jcommon-1.0.23.jar"/>
+	<classpathentry kind="lib" path="libs/JFreeChart/jfreechart-1.0.19.jar"/>
+	<classpathentry kind="lib" path="libs/JFreeChart/jfreechart-1.0.19-experimental.jar"/>
+	<classpathentry kind="lib" path="libs/JFreeChart/jfreechart-1.0.19-swt.jar"/>
+	<classpathentry kind="lib" path="libs/JFreeChart/jfreesvg-2.0.jar"/>
+	<classpathentry kind="lib" path="libs/JFreeChart/junit-4.11.jar"/>
+	<classpathentry kind="lib" path="libs/JFreeChart/orsoncharts-1.4-eval-nofx.jar"/>
+	<classpathentry kind="lib" path="libs/JFreeChart/orsonpdf-1.6-eval.jar"/>
+	<classpathentry kind="lib" path="libs/JFreeChart/servlet.jar"/>
+	<classpathentry kind="lib" path="libs/JFreeChart/swtgraphics2d.jar"/>
+	<classpathentry kind="lib" path="libs/JavaMail/activation.jar"/>
+	<classpathentry kind="lib" path="libs/JavaMail/java-mail-1.4.4.jar"/>
+>>>>>>> branch 'master' of https://github.com/dpuertoo/PROYECTOFINAL2022-2.git
 	<classpathentry kind="output" path="bin"/>
 </classpath>

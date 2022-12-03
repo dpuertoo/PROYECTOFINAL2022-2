@@ -2,17 +2,29 @@ package co.edu.unbosque.model;
 
 import java.util.ArrayList;
 
+import co.edu.unbosque.model.persistence.BinarioFile;
 import co.edu.unbosque.model.persistence.FileHandler;
 
 public class UsuarioDAO implements InterfaceDAO {
 
+<<<<<<< HEAD
 	private ArrayList<UsuarioDTO> lista;
+=======
+	private ArrayList<UsuarioDTO> usuarios;
+	private BinarioFile bf;
+>>>>>>> branch 'master' of https://github.com/dpuertoo/PROYECTOFINAL2022-2.git
 
 	public UsuarioDAO() {
+<<<<<<< HEAD
 		lista = new ArrayList<UsuarioDTO>();
 		cargarArchivo();
+=======
+		this.usuarios = new ArrayList<>();
+		this.bf = new BinarioFile();
+>>>>>>> branch 'master' of https://github.com/dpuertoo/PROYECTOFINAL2022-2.git
 	}
 
+<<<<<<< HEAD
 	public void escribirArchivo() {
 		String contenido = mostrarTodo();
 		FileHandler.escribirArchivo("datoss.csv", contenido);
@@ -37,6 +49,14 @@ public class UsuarioDAO implements InterfaceDAO {
 					Integer.parseInt(columna[13]), Integer.parseInt(columna[14]), Integer.parseInt(columna[15]),
 					columna[16]));
 
+=======
+	public void agregarUsuario(UsuarioDTO pUsuario, GUI g) {
+		if (buscarUsuario(pUsuario.getUsuario(), g) == null) {
+			this.usuarios.add(pUsuario);
+			this.bf.escribirRegistro(this.usuarios);
+		} else {
+			g.mostrarMensaje("Este user ya esta registrado", "Advertencia", 2);
+>>>>>>> branch 'master' of https://github.com/dpuertoo/PROYECTOFINAL2022-2.git
 		}
 	}
 
@@ -52,6 +72,7 @@ public class UsuarioDAO implements InterfaceDAO {
 	public ArrayList<UsuarioDTO> getLista() {
 		return lista;
 	}
+<<<<<<< HEAD
 
 	public void setLista(ArrayList<UsuarioDTO> lista) {
 		this.lista = lista;
@@ -66,4 +87,10 @@ public class UsuarioDAO implements InterfaceDAO {
 		return res;
 	}
 
+=======
+	
+	public void toCsv() {
+		
+	}
+>>>>>>> branch 'master' of https://github.com/dpuertoo/PROYECTOFINAL2022-2.git
 }

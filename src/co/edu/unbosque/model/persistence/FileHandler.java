@@ -1,17 +1,25 @@
 package co.edu.unbosque.model.persistence;
 
+import java.io.BufferedReader;
 import java.io.File;
+
 
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
+import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.PrintWriter;
 import java.util.ArrayList;
+<<<<<<< HEAD
 import java.util.Properties;
 import java.util.Scanner;
+=======
+import java.util.Iterator;
+>>>>>>> branch 'master' of https://github.com/dpuertoo/PROYECTOFINAL2022-2.git
 
 import org.jfree.chart.JFreeChart;
 import org.jfree.data.category.DefaultCategoryDataset;
@@ -23,6 +31,7 @@ import com.itextpdf.layout.element.Paragraph;
 
 import co.edu.unbosque.model.UsuarioDTO;
 
+
 public class FileHandler {
 	private static File archivo;
 	private static Scanner lector;
@@ -33,7 +42,19 @@ public class FileHandler {
 	private static FileOutputStream fos;
 	private static ObjectOutputStream oos;
 
+<<<<<<< HEAD
 	public static Object leerSerializable(String nombre_archivo) {
+=======
+	public static final String RUTADATOS = "./data/datos.csv";
+	private File fDatos;
+
+	public FileHandler() {
+		this.fDatos = new File(RUTADATOS);
+	}
+
+
+	public int escribirRegistro(ArrayList<UsuarioDTO> eDTO) {
+>>>>>>> branch 'master' of https://github.com/dpuertoo/PROYECTOFINAL2022-2.git
 		try {
 			fis = new FileInputStream("./data/" + nombre_archivo);
 		} catch (FileNotFoundException e) {
@@ -57,6 +78,7 @@ public class FileHandler {
 		return aux;
 	}
 
+<<<<<<< HEAD
 	public static void escribirSerializable(Object o, String nobre_archivo) {
 		try {// buscar
 			fos = new FileOutputStream("./data/" + nobre_archivo);
@@ -97,6 +119,27 @@ public class FileHandler {
 			}
 		}
 		String contenido = "";
+=======
+//	@SuppressWarnings("unchecked")
+//	public ArrayList<UsuarioDTO> leerRegistro() {
+//		ArrayList<UsuarioDTO> listaregistrados = new ArrayList<UsuarioDTO>();
+//		if (fBinario.length() != 0) {
+//			ObjectInputStream in;
+//			try {
+//				in = new ObjectInputStream(new FileInputStream(fBinario));
+//				listaregistrados = (ArrayList<UsuarioDTO>) in.readObject();
+//				in.close();
+//			} catch (IOException | ClassNotFoundException e) {
+//				e.printStackTrace();
+//				System.out.println("Error en el metodo LeerRegistro");
+//			}
+//		}
+//		return listaregistrados;
+//	}
+
+	public void generarPDF() {
+		File archivopdf = new File("./data/Estadisticas.pdf");
+>>>>>>> branch 'master' of https://github.com/dpuertoo/PROYECTOFINAL2022-2.git
 		try {
 			lector = new Scanner(archivo);
 			while (lector.hasNext()) {
@@ -106,9 +149,60 @@ public class FileHandler {
 			System.out.println("El archivo no existe");
 			e.printStackTrace();
 		}
+<<<<<<< HEAD
 		lector.close();
 		return contenido;
+=======
+	}
+	
+//	public String[] leerCsv(ArrayList<UsuarioDTO> a) {
+//		UsuarioDTO u;
+//		String linea;
+//		String[] datos;
+//		try {
+//			FileReader fr = new FileReader(this.fDatos);
+//			BufferedReader br = new BufferedReader(fr);
+//			while (br.readLine() != null) {
+//				datos = br.readLine().split(",");
+////				u = new UsuarioDTO(datos[0], datos[0], datos[0], datos[0], datos[0], datos[0], datos[0], datos[0], String.valueOf(datos[0]), 0, 0, 0, 0, 0, 0, false, false)
+//				a.add(u);
+//			}
+//			fr.close();
+//		} catch (IOException e) {
+//			return null;
+//		}
+//		return datos;
+//	}
+	
+	public void escribirCsv(ArrayList<UsuarioDTO> a) {
+//		try {
+//			FileWriter fw = new FileWriter(this.fDatos);
+//			PrintWriter pw = new PrintWriter(fw);
+//
+//			pw.print(pDato);
+//			fw.close();
+//
+//		} catch (IOException e) {
+//			return -1;
+//		}
+//		return 0;
+		
+		try {
+			FileWriter fw = new FileWriter(fDatos);
+			for (UsuarioDTO u : a) {
+				fw.write(u.toCsv()+"\n");
+			}
+		} catch (Exception e) {
+			System.out.println("error");
+		}
+	}
 
+	public void hacerGrafica() {
+		JFreeChart grafica;
+		DefaultCategoryDataset Datos = new DefaultCategoryDataset();
+>>>>>>> branch 'master' of https://github.com/dpuertoo/PROYECTOFINAL2022-2.git
+
+<<<<<<< HEAD
 	}
 
 	public static void escribirArchivo(String nombre_archivo, String contenido) {
@@ -131,6 +225,9 @@ public class FileHandler {
 		escritor.close();
 	}
 
+=======
+	}
+>>>>>>> branch 'master' of https://github.com/dpuertoo/PROYECTOFINAL2022-2.git
 }
 
 //	public void generarPDF() {
