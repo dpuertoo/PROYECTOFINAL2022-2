@@ -2,23 +2,24 @@ package co.edu.unbosque.model;
 
 import java.util.ArrayList;
 
+import co.edu.unbosque.model.persistence.BinarioFile;
 import co.edu.unbosque.model.persistence.FileHandler;
 import co.edu.unbosque.view.GUI;
 
 public class UsuarioDAO {
 
 	private ArrayList<UsuarioDTO> usuarios;
-	private FileHandler fh;
+	private BinarioFile bf;
 
 	public UsuarioDAO() {
 		this.usuarios = new ArrayList<>();
-		this.fh = new FileHandler();
+		this.bf = new BinarioFile();
 	}
 
 	public void agregarUsuario(UsuarioDTO pUsuario, GUI g) {
 		if (buscarUsuario(pUsuario.getUsuario(), g) == null) {
 			this.usuarios.add(pUsuario);
-			this.fh.escribirRegistro(this.usuarios);
+			this.bf.escribirRegistro(this.usuarios);
 		} else {
 			g.mostrarMensaje("Este user ya esta registrado", "Advertencia", 2);
 		}

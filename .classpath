@@ -6,21 +6,6 @@
 			<attribute name="module" value="true"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry kind="lib" path="libs/iText/barcodes-7.1.16.jar"/>
-	<classpathentry kind="lib" path="libs/iText/font-asian-7.1.16.jar"/>
-	<classpathentry kind="lib" path="libs/iText/forms-7.1.16.jar"/>
-	<classpathentry kind="lib" path="libs/iText/hyph-7.1.16.jar"/>
-	<classpathentry kind="lib" path="libs/iText/io-7.1.16.jar"/>
-	<classpathentry kind="lib" path="libs/iText/kernel-7.1.16.jar"/>
-	<classpathentry kind="lib" path="libs/iText/layout-7.1.16.jar"/>
-	<classpathentry kind="lib" path="libs/iText/log4j-1.2.17.jar"/>
-	<classpathentry kind="lib" path="libs/iText/pdfa-7.1.16.jar"/>
-	<classpathentry kind="lib" path="libs/iText/pdftest-7.1.16.jar"/>
-	<classpathentry kind="lib" path="libs/iText/sign-7.1.16.jar"/>
-	<classpathentry kind="lib" path="libs/iText/slf4j-api-1.7.9.jar"/>
-	<classpathentry kind="lib" path="libs/iText/slf4j-log4j12-1.7.9.jar"/>
-	<classpathentry kind="lib" path="libs/iText/styled-xml-parser-7.1.16.jar"/>
-	<classpathentry kind="lib" path="libs/iText/svg-7.1.16.jar"/>
 	<classpathentry kind="lib" path="libs/JCalendar/jcalendar-1.4.jar"/>
 	<classpathentry kind="lib" path="libs/JCalendar/jgoodies-common-1.2.0.jar"/>
 	<classpathentry kind="lib" path="libs/JCalendar/jgoodies-looks-2.4.1.jar"/>
@@ -36,5 +21,7 @@
 	<classpathentry kind="lib" path="libs/JFreeChart/orsonpdf-1.6-eval.jar"/>
 	<classpathentry kind="lib" path="libs/JFreeChart/servlet.jar"/>
 	<classpathentry kind="lib" path="libs/JFreeChart/swtgraphics2d.jar"/>
+	<classpathentry kind="lib" path="libs/JavaMail/activation.jar"/>
+	<classpathentry kind="lib" path="libs/JavaMail/java-mail-1.4.4.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

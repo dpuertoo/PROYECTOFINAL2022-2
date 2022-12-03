@@ -6,18 +6,18 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 
-import co.edu.unbosque.model.FachadaProvisional;
+import co.edu.unbosque.model.Logica;
 import co.edu.unbosque.model.UsuarioDTO;
 import co.edu.unbosque.view.GUI;
 
 public class Controller implements ActionListener {
 
 	private GUI g;
-	private FachadaProvisional f;
+	private Logica l;
 
 	public Controller() {
 		this.g = new GUI(this);
-		this.f = new FachadaProvisional();
+		this.l = new Logica();
 		this.g.getVp().setVisible(true);
 
 	}
@@ -36,7 +36,11 @@ public class Controller implements ActionListener {
 			comprobarUsuarioVp();
 		}
 		if (e.getActionCommand().equals(this.g.getVr().FINALIZAR)) {
-			verificarEspaciosVr();
+			this.g.mostrarMensaje(
+					this.l.getCorreo().sendEmail(this.g.getVr().getTxtUsuario().getText(),
+							this.g.getVr().getTxtContrasena().getText(), this.g.getVr().getTxtCorreo().getText()),
+					"Aviso", 1);
+			// verificarEspaciosVr();
 //			this.g.getVu().setVisible(true);
 //			this.g.getVr().dispose();
 //			this.f.getuDAO().agregarUsuario(obtenerDatos(), this.g);
@@ -60,11 +64,11 @@ public class Controller implements ActionListener {
 		}
 		if (e.getActionCommand().equals(this.g.getVa().getPanelMenu().BUSCAR)) {
 			this.g.mostrarUsuario(
-					this.f.getuDAO().buscarUsuario(this.g.getVa().getPanelMenu().getTxtbuscador().getText(), this.g),
+					this.l.getuDAO().buscarUsuario(this.g.getVa().getPanelMenu().getTxtbuscador().getText(), this.g),
 					null, null);
 		}
 		if (e.getActionCommand().equals(this.g.getVa().getPanelMenu().GENERARPDF)) {
-			this.f.getFh().generarPDF();
+			this.l.getPdf().generarPDF();
 		}
 	}
 
@@ -127,26 +131,6 @@ public class Controller implements ActionListener {
 		return difAno;
 	}
 
-	public String PasarDivorcioAString(boolean divorcio) {
-		String respuesta = "";
-		if (divorcio == true) {
-			respuesta = "Si";
-		} else {
-			respuesta = "No";
-		}
-		return respuesta;
-	}
-
-	public String PasarEstadoAString(boolean estado) {
-		String respuesta = "";
-		if (estado == true) {
-			respuesta = "Disponible";
-		} else {
-			respuesta = "Inactivo";
-		}
-		return respuesta;
-	}
-
 	public String separarApellido1() {
 		String apellidos = g.getVr().getTxtApellido().getText();
 		String[] partes = apellidos.split(" ");
@@ -161,7 +145,6 @@ public class Controller implements ActionListener {
 		return apellido2;
 	}
 
-	@SuppressWarnings("unlikely-arg-type")
 	public void verificarEspaciosVr() {
 		if (this.g.getVr().getDivorciosi().isSelected() == true) {
 			System.out.println("si");
@@ -214,9 +197,9 @@ public class Controller implements ActionListener {
 		} else if (usuarioAdmin.equals("Admin") == true && contrasenaAdmin.equals("1234") == true) {
 			this.g.getVa().setVisible(true);
 			this.g.getVp().dispose();
-			this.f.getFh().leerRegistro();
-			this.g.mostrarRegistros(f.getuDAO().listarArrayUsuarios().size(), f.getuDAO().listarArrayUsuarios(),
-					PasarDivorcioAString(obtenerDatoRadioButton()), PasarEstadoAString(true));
+			this.l.getBf().leerRegistro();
+			this.g.mostrarRegistros(l.getuDAO().listarArrayUsuarios().size(), l.getuDAO().listarArrayUsuarios(),
+					l.PasarDivorcioAString(obtenerDatoRadioButton()), l.PasarEstadoAString(true));
 		} else {
 			this.g.getVu().setVisible(true);
 			// Aca va el metodo que busca el usuario y comprueba si ya estsa registrado,

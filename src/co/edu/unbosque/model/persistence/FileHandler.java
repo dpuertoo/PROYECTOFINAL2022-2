@@ -3,6 +3,7 @@ package co.edu.unbosque.model.persistence;
 import java.io.BufferedReader;
 import java.io.File;
 
+
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
@@ -25,16 +26,16 @@ import com.itextpdf.layout.element.Paragraph;
 
 import co.edu.unbosque.model.UsuarioDTO;
 
+
 public class FileHandler {
 
-	public static final String RUTABINARIO = "./data/archivo.dat";
 	public static final String RUTADATOS = "./data/datos.csv";
-	private File fBinario, fDatos;
+	private File fDatos;
 
 	public FileHandler() {
-		this.fBinario = new File(RUTABINARIO);
 		this.fDatos = new File(RUTADATOS);
 	}
+
 
 	public int escribirRegistro(ArrayList<UsuarioDTO> eDTO) {
 		try {
@@ -49,22 +50,22 @@ public class FileHandler {
 		return 1;
 	}
 
-	@SuppressWarnings("unchecked")
-	public ArrayList<UsuarioDTO> leerRegistro() {
-		ArrayList<UsuarioDTO> listaregistrados = new ArrayList<UsuarioDTO>();
-		if (fBinario.length() != 0) {
-			ObjectInputStream in;
-			try {
-				in = new ObjectInputStream(new FileInputStream(fBinario));
-				listaregistrados = (ArrayList<UsuarioDTO>) in.readObject();
-				in.close();
-			} catch (IOException | ClassNotFoundException e) {
-				e.printStackTrace();
-				System.out.println("Error en el metodo LeerRegistro");
-			}
-		}
-		return listaregistrados;
-	}
+//	@SuppressWarnings("unchecked")
+//	public ArrayList<UsuarioDTO> leerRegistro() {
+//		ArrayList<UsuarioDTO> listaregistrados = new ArrayList<UsuarioDTO>();
+//		if (fBinario.length() != 0) {
+//			ObjectInputStream in;
+//			try {
+//				in = new ObjectInputStream(new FileInputStream(fBinario));
+//				listaregistrados = (ArrayList<UsuarioDTO>) in.readObject();
+//				in.close();
+//			} catch (IOException | ClassNotFoundException e) {
+//				e.printStackTrace();
+//				System.out.println("Error en el metodo LeerRegistro");
+//			}
+//		}
+//		return listaregistrados;
+//	}
 
 	public void generarPDF() {
 		File archivopdf = new File("./data/Estadisticas.pdf");
